@@ -1,0 +1,33 @@
+.fe-layout_header .app-name {
+  font-size: 28px;
+}
+.fe-layout_header {
+  border: 2px solid black;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.fe-layout_header nav {
+  display: flex;
+  list-style: none;
+  gap: 8px;
+  padding: 8px 16px;
+  border-top: 2px solid black;
+}
+.fe-layout_header a {
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+}
+.fe-layout_header .active {
+  text-decoration: underline;
+}
+@media (max-width: 480px) {
+  .fe-layout_header .app-name {
+    text-align: center;
+  }
+  .fe-layout_header nav {
+    justify-content: space-between;
+  }
+}
