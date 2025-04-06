@@ -1,12 +1,14 @@
 <?php
-define('DB_HOST', "mysql.nethely.hu");
-define('DB_PORT', "3306");
-define('DB_NAME', "wyltor");
-define('DB_USERNAME', "wyltor");
-define('DB_PASSWORD', "014489EE");
-define('DB_DSN', 'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ':' . DB_PORT);
+//define('DB_HOST', 'localhost');
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'web-1-la');
+
+define('DB_USERNAME', 'root');
+define('DB_PASSWORD', '');
+define('DB_DSN', 'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME);
+
 $ablakcim = array(
-    'cim' => 'Mini honlap Kft.',
+    'cim' => 'Nyilvántartás Kft.',
 );
 
 $fejlec = array(
@@ -23,10 +25,8 @@ $lablec = array(
 
 $oldalak = array(
     '/' => array('fajl' => 'cimlap', 'szoveg' => 'Címlap', 'menun' => array(1, 1)),
-    'bemutatkozas' => array('fajl' => 'bemutatkozas', 'szoveg' => 'Bemutatkozás', 'menun' => array(1, 1)),
     'kapcsolat' => array('fajl' => 'kapcsolat', 'szoveg' => 'Kapcsolat', 'menun' => array(1, 1)),
-    'cikkek' => array('fajl' => 'cikkek', 'szoveg' => 'Cikkek', 'menun' => array(1, 1)),
-    'tablazat' => array('fajl' => 'tablazat', 'szoveg' => 'Táblázat', 'menun' => array(1, 1)),
+    'uzenetek' => array('fajl' => 'uzenetek', 'szoveg' => 'Üzenetek', 'menun' => array(1, 1)),
     'belepes' => array('fajl' => 'belepes', 'szoveg' => 'Belépés', 'menun' => array(1, 0)),
     'kilepes' => array('fajl' => 'kilepes', 'szoveg' => 'Kilépés', 'menun' => array(0, 1)),
     'belep' => array('fajl' => 'belep', 'szoveg' => '', 'menun' => array(0, 0)),

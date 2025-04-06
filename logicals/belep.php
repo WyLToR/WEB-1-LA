@@ -1,25 +1,29 @@
 <?php
-if(isset($_POST['felhasznalo']) && isset($_POST['jelszo'])) {
+if (isset($_POST['username']) && isset($_POST['password'])) {
     try {
-        // Kapcsolódás
-        $dbh = new PDO(DB_DSN,DB_USERNAME,DB_PASSWORD,
-                        array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION));
+        $dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD,
+            array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
         $dbh->query('SET NAMES utf8 COLLATE utf8_hungarian_ci');
-        
-        // Felhsználó keresése
-        $sqlSelect = "select id, csaladi_nev, uto_nev from felhasznalok where bejelentkezes = :bejelentkezes and jelszo = sha1(:jelszo)";
+
+        $sqlSelect = "select id, last_name, first_name, password from users where username = :username and password = sha1(:password)";
         $sth = $dbh->prepare($sqlSelect);
-        $sth->execute(array(':bejelentkezes' => $_POST['felhasznalo'], ':jelszo' => $_POST['jelszo']));
+        $sth->execute(array(':username' => $_POST['username'], ':password' => $_POST['password']));
         $row = $sth->fetch(PDO::FETCH_ASSOC);
-        if($row) {
-            $_SESSION['csn'] = $row['csaladi_nev']; $_SESSION['un'] = $row['uto_nev']; $_SESSION['login'] = $_POST['felhasznalo'];
+
+        if ($row) {
+            $log = "insert into logs(userId, action) values(:userId, :action)";
+            $sth = $dbh->prepare($log);
+            $sth->execute(array(':userId' => $row["id"], ':action' => 'Felhasználó bejelentkezett'));
+            $_SESSION['csn'] = $row['last_name'];
+            $_SESSION['un'] = $row['password'];
+            $_SESSION['login'] = $_POST['username'];
+        } else {
+            $errormessage = "Hibás felhasználónév vagy jelszó!";
         }
+    } catch (PDOException $e) {
+        $errormessage = "Hiba: " . $e->getMessage();
     }
-    catch (PDOException $e) {
-        $errormessage = "Hiba: ".$e->getMessage();
-    }      
-}
-else {
+} else {
     header("Location: .");
 }
 ?>

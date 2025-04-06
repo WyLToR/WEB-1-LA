@@ -1,5 +1,5 @@
 <?php
-if (isset($_POST['felhasznalo']) && isset($_POST['jelszo']) && isset($_POST['vezeteknev']) && isset($_POST['utonev'])) {
+if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['last_name']) && isset($_POST['first_name'])) {
     try {
         // Kapcsolódás
         $dbh = new PDO(
@@ -11,26 +11,29 @@ if (isset($_POST['felhasznalo']) && isset($_POST['jelszo']) && isset($_POST['vez
         $dbh->query('SET NAMES utf8 COLLATE utf8_hungarian_ci');
 
         // Létezik már a felhasználói név?
-        $sqlSelect = "select id from felhasznalok where bejelentkezes = :bejelentkezes";
+        $sqlSelect = "select id from users where username = :username";
         $sth = $dbh->prepare($sqlSelect);
-        $sth->execute(array(':bejelentkezes' => $_POST['felhasznalo']));
+        $sth->execute(array(':username' => $_POST['username']));
         if ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
             $uzenet = "A felhasználói név már foglalt!";
             $ujra = "true";
         } else {
             // Ha nem létezik, akkor regisztráljuk
-            $sqlInsert = "insert into felhasznalok(id, csaladi_nev, uto_nev, bejelentkezes, jelszo)
-                          values(0, :csaladinev, :utonev, :bejelentkezes, :jelszo)";
+            $sqlInsert = "insert into users(id, last_name, first_name, username, password)
+                          values(0, :last_name, :first_name, :username, :password)";
             $stmt = $dbh->prepare($sqlInsert);
             $stmt->execute(array(
-                ':csaladinev' => $_POST['vezeteknev'],
-                ':utonev' => $_POST['utonev'],
-                ':bejelentkezes' => $_POST['felhasznalo'],
-                ':jelszo' => sha1($_POST['jelszo'])
+                ':last_name' => $_POST['last_name'],
+                ':first_name' => $_POST['first_name'],
+                ':username' => $_POST['username'],
+                ':password' => sha1($_POST['password'])
             ));
-            if ($count = $stmt->rowCount()) {
-                $newid = $dbh->lastInsertId();
-                $uzenet = "A regisztrációja sikeres.<br>Azonosítója: {$newid}";
+            if ($stmt->rowCount() > 0) {
+                $newUserId = $dbh->lastInsertId();
+                $log = "insert into logs(userId, action) values(:userId, :action)";
+                $sth = $dbh->prepare($log);
+                $sth->execute(array(':userId' => $newUserId, ':action' => 'Új felhasználó regisztrált'));
+                $uzenet = "A regisztrációja sikeres.<br>Azonosítója: {$newUserId}";
                 $ujra = false;
             } else {
                 $uzenet = "A regisztráció nem sikerült.";
