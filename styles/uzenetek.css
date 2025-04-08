@@ -3,6 +3,7 @@ table {
     border-collapse: collapse;
     margin: 20px 0;
     font-family: Arial, sans-serif;
+    overflow: scroll;
 }
 
 th, td {
@@ -31,4 +32,20 @@ thead {
 tbody td {
     word-wrap: break-word;
     overflow-wrap: break-word;
+}
+
+@media (max-width: 720px) {
+    .table_last_name {
+        display: none;
+    }
+}
+@media (max-width: 600px) {
+    .table_first_name {
+        display: none;
+    }
+}
+@media (max-width: 480px) {
+    .table_userId {
+        display: none;
+    }
 }

@@ -14,7 +14,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
             $log = "insert into logs(userId, action) values(:userId, :action)";
             $sth = $dbh->prepare($log);
             $sth->execute(array(':userId' => $row["id"], ':action' => 'Felhasználó bejelentkezett'));
-            $_SESSION['csn'] = $row['last_name'];
+            $_SESSION['csn'] = $row['last_name'] . " " . $row['first_name'];
             $_SESSION['un'] = $row['password'];
             $_SESSION['login'] = $_POST['username'];
         } else {

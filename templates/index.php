@@ -21,7 +21,7 @@
         <div>
             <?php if (isset($fejlec['motto'])) { ?><h2><?= $fejlec['motto'] ?></h2><?php } ?>
             <?php if (isset($_SESSION['login'])) { ?>Bejlentkezve:
-                <strong><?= $_SESSION['csn'] . " " . $_SESSION['un'] . " (" . $_SESSION['login'] . ")" ?></strong><?php } ?>
+                <strong><?= $_SESSION['csn'] . "(" . $_SESSION['login'] . ")" ?></strong><?php } ?>
         </div>
     </div>
     <nav class="navigation">
@@ -30,8 +30,7 @@
                 <?php if (!isset($_SESSION['login']) && $oldal['menun'][0] || isset($_SESSION['login']) && $oldal['menun'][1]) { ?>
                     <li<?= (($oldal == $keres) ? ' class="active"' : '') ?>>
                         <a href="<?= ($url == '/') ? '.' : $url ?>">
-                            <?= $oldal['szoveg'] ?>
-                        </a>
+                            <?= $oldal['szoveg'] ?></a>
                     </li>
                 <?php } ?>
             <?php } ?>

@@ -20,12 +20,12 @@ if (isset($_SESSION["csn"]) && isset($_SESSION["login"]) && isset($_SESSION["un"
             <table>
                 <thead>
                 <tr>
-                    <th>Azonosító</th>
-                    <th>User_ID</th>
-                    <th>Felhasználó Név</th>
-                    <th>Vezetéknév</th>
-                    <th>Keresztnév</th>
-                    <th>Művelet</th>
+                    <th class="table_id">Azonosító</th>
+                    <th class="table_userId">User_ID</th>
+                    <th class="table_user">Felhasználó Név</th>
+                    <th class="table_last_name">Vezetéknév</th>
+                    <th class="table_first_name">Keresztnév</th>
+                    <th class="table_action">Művelet</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -33,12 +33,12 @@ if (isset($_SESSION["csn"]) && isset($_SESSION["login"]) && isset($_SESSION["un"
                 foreach ($rows as $item) {
                     ?>
                     <tr>
-                        <td><?= $item['id'] ?></td>
-                        <td><?= $item['userId'] ?></td>
-                        <td><?= $item['username'] ?></td>
-                        <td><?= $item['last_name'] ?></td>
-                        <td><?= $item['first_name'] ?></td>
-                        <td><?= $item['action'] ?></td>
+                        <td class="table_id"><?= $item['id'] ?></td>
+                        <td class="table_userId"><?= $item['userId'] ?></td>
+                        <td class="table_user"><?= $item['username'] ?></td>
+                        <td class="table_last_name"><?= $item['last_name'] ?></td>
+                        <td class="table_first_name"><?= $item['first_name'] ?></td>
+                        <td class="table_action"><?= $item['action'] ?></td>
                     </tr>
                     <?php
                 }

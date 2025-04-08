@@ -10,7 +10,6 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['last
         );
         $dbh->query('SET NAMES utf8 COLLATE utf8_hungarian_ci');
 
-        // Létezik már a felhasználói név?
         $sqlSelect = "select id from users where username = :username";
         $sth = $dbh->prepare($sqlSelect);
         $sth->execute(array(':username' => $_POST['username']));
@@ -18,7 +17,6 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['last
             $uzenet = "A felhasználói név már foglalt!";
             $ujra = "true";
         } else {
-            // Ha nem létezik, akkor regisztráljuk
             $sqlInsert = "insert into users(id, last_name, first_name, username, password)
                           values(0, :last_name, :first_name, :username, :password)";
             $stmt = $dbh->prepare($sqlInsert);
