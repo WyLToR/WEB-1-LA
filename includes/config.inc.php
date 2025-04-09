@@ -1,16 +1,9 @@
 <?php
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'web-1-la');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
-define('DB_DSN', 'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME);
-
-//define('DB_HOST', 'localhost');
-//define('DB_NAME', 'web-1-la');
-//define('DB_USERNAME', 'wyltor');
-//define('DB_PASSWORD', 'nA4aS1kN9w');
-//define('DB_DSN', 'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME);
-//define('DB_DSN', 'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';port=' . DB_PORT);
+//define your own
+ //define your own DB_NAME
+//define your own DB_USERNAME
+//define your own DB_PASSWORD
+//CREATE DB_DSN
 
 $ablakcim = array(
     'cim' => 'Nyilvántartás Kft.',
