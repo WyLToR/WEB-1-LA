@@ -5,7 +5,6 @@ if (isset($_SESSION["csn"]) && isset($_SESSION["login"]) && isset($_SESSION["un"
             array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
         $dbh->query('SET NAMES utf8 COLLATE utf8_hungarian_ci');
 
-        // Lekérdezés előkészítése
         $sqlSelect = "
             SELECT logs.id, logs.userId, logs.action, users.username, users.last_name, users.first_name
             FROM logs

@@ -1,10 +1,4 @@
 RewriteEngine on
-
-# Képeket (és más statikus fájlokat) közvetlenül kiszolgálunk
-RewriteCond %{REQUEST_FILENAME} -f
-RewriteRule ^kepek/.*$ - [L]
-
-# A többi kérést átirányítjuk az index.php-ra
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php?$1 [L,QSA]

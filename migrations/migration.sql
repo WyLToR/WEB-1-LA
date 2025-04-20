@@ -11,7 +11,7 @@ CREATE TABLE `users`
 CREATE TABLE logs
 (
     id         INT AUTO_INCREMENT PRIMARY KEY,
-    userId    INT          NOT NULL,
+    userId     INT          NOT NULL,
     action     VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -23,4 +23,11 @@ CREATE TABLE images
     filepath     VARCHAR(255) NOT NULL,
     uploaded_at  DATETIME DEFAULT CURRENT_TIMESTAMP,
     uploadedUser VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE contact
+(
+    id      INT AUTO_INCREMENT PRIMARY KEY,
+    email   VARCHAR(255) NOT NULL,
+    message TEXT         NOT NULL
 );

@@ -47,6 +47,20 @@ if (isset($_POST['kuld'])) {
                             ':uploadedUser' => $uploadedUser
                         ]);
                         $uzenet[] = 'Adatbázisba sikeres beszúrás: ' . $fajl['name'];
+                        $sqlSelect = "SELECT id FROM users WHERE username = :username";
+                        $sth = $dbh->prepare($sqlSelect);
+                        $sth->execute(array(':username' => $_SESSION['login']));
+                        $row = $sth->fetch(PDO::FETCH_ASSOC);
+
+                        if ($row) {
+                            $log = "INSERT INTO logs(userId, action) VALUES(:userId, :action)";
+                            $sth = $dbh->prepare($log);
+                            $sth->execute(array(
+                                ':userId' => $row["id"],
+                                ':action' => 'Képfeltöltés történt: ' . $fajl['name']
+                            ));
+                            $uzenet[] = 'Feltöltés logolva: ' . $fajl['name'];
+                        }
                     } catch (PDOException $e) {
                         $uzenet[] = "Adatbázis hiba: " . $e->getMessage();
                     }
